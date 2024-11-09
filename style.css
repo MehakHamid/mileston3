@@ -10,7 +10,8 @@ body {
 }
 
 .header {
-  background-color: #007bff; /* Blue background */
+  background-color: #007bff;
+  /* Blue background */
   color: #fff;
   padding: 20px;
   text-align: center;
@@ -25,7 +26,8 @@ body {
 }
 
 .objective {
-  background-color: #fff; /* White background */
+  background-color: #fff;
+  /* White background */
   padding: 20px;
   text-align: center;
 }
@@ -35,6 +37,7 @@ body {
   height: 30px;
   font-size: 18px;
   padding: 10px;
+
 }
 
 .resume-content {
@@ -44,13 +47,15 @@ body {
 
 .left-section {
   width: 35%;
-  background-color: #ADD8E6; /* Light blue background */
+  background-color: #ADD8E6;
+  /* Light blue background */
   padding: 20px;
 }
 
 .right-section {
   width: 65%;
-  background-color: #fff; /* White background */
+  background-color: #fff;
+  /* White background */
   padding: 20px;
 }
 
@@ -58,11 +63,17 @@ h3 {
   margin-top: 0;
 }
 
-input[type="text"], textarea {
+input[type="text"],
+textarea {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ddd;
+  outline: none;
+  border: none;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-left: 1px solid #ddd;
 }
 
 button {
@@ -93,4 +104,3 @@ button:hover {
 #generate-resume:hover {
   background-color: #3e8e41;
 }
-
