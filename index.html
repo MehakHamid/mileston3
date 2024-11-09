@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Resume Builder</title>
+  <link rel="stylesheet" href="style.css">  <!-- Link to your CSS file -->
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <input id="name" type="text" placeholder="Enter Your Name">
+      <label>Objective:</label>
+      <input id="objective" type="text" placeholder="Enter your Objective summary">
+    </div>
+
+    <div class="resume-content">
+      <!-- Left Section -->
+      <div class="left-section">
+        <h3>Personal Info</h3>
+        <div id="personal-info">
+          <p>Email: <input id="email" type="text" placeholder="Email"></p>
+          <p>Address: <input id="address" type="text" placeholder="Address"></p>
+          <p>DOB: <input id="dob" type="text" placeholder="Date of Birth"></p>
+          <p>CNIC: <input id="cnic" type="text" placeholder="CNIC"></p>
+        </div>
+
+        <h3>Skills</h3>
+        <div id="skills">
+          <input type="text" placeholder="Skill">
+        </div>
+        <button id="add-skill">Add More</button>
+
+        <h3>Achievements</h3>
+        <div id="achievements">
+          <input type="text" placeholder="Achievement">
+        </div>
+        <button id="add-achievement">Add More</button>
+
+        <h3>Languages</h3>
+        <div id="languages">
+          <input type="text" placeholder="Language">
+        </div>
+        <button id="add-language">Add More</button>
+      </div>
+
+      <!-- Right Section -->
+      <div class="right-section">
+        <h3>Education</h3>
+        <div id="education">
+          <input type="text" placeholder="Institute Name">
+          <input type="text" placeholder="Subject">
+          <input type="text" placeholder="Passing Year">
+        </div>
+        <button id="add-education">Add More</button>
+
+        <h3>Experience</h3>
+        <select id="experience-type">
+          <option value="fresh">Fresh</option>
+          <option value="experienced">Experienced</option>
+        </select>
+        <div id="experience">
+          <p>Company Name: <input type="text" placeholder="Company Name"></p>
+          <p>Position: <input type="text" placeholder="Position"></p>
+          <p>Years of Experience: <input type="text" placeholder="Years"></p>
+          <p>Responsibilities: <textarea placeholder="Responsibilities"></textarea></p>
+        </div>
+        <button id="add-experience">Add More</button>
+
+        <h3>Projects</h3>
+        <div id="projects">
+          <input type="text" placeholder="Project Name">
+          <textarea placeholder="Project Description"></textarea>
+        </div>
+        <button id="add-project">Add More</button>
+
+        <h3>References</h3>
+        <p>Available upon request</p>
+      </div>
+    </div>
+    <div id="resume-output"><button id="generate-resume">Generate Resume</button></div>
+
+    
+  </div>
+
+  <script src="script.js"></script> <!-- Link to your JavaScript file -->
+</body>
+</html>

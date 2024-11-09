@@ -1,0 +1,96 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+}
+
+.header {
+  background-color: #007bff; /* Blue background */
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.header input[type="text"] {
+  width: 50%;
+  height: 30px;
+  font-size: 18px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.objective {
+  background-color: #fff; /* White background */
+  padding: 20px;
+  text-align: center;
+}
+
+.objective input[type="text"] {
+  width: 70%;
+  height: 30px;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.resume-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-section {
+  width: 35%;
+  background-color: #ADD8E6; /* Light blue background */
+  padding: 20px;
+}
+
+.right-section {
+  width: 65%;
+  background-color: #fff; /* White background */
+  padding: 20px;
+}
+
+h3 {
+  margin-top: 0;
+}
+
+input[type="text"], textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#resume-output {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#generate-resume {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+#generate-resume:hover {
+  background-color: #3e8e41;
+}
+
