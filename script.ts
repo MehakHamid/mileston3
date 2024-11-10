@@ -18,19 +18,20 @@ interface ProjectEntry {
 }
 
 // Get references to the HTML elements
-const generateResumeBtn = document.getElementById("generate-resume") as HTMLButtonElement;
+const generateResumeBtn = document.getElementById(
+  "generate-resume"
+) as HTMLButtonElement;
 const nameInput = document.getElementById("name") as HTMLInputElement;
 const objectiveInput = document.getElementById("objective") as HTMLInputElement;
 const emailInput = document.getElementById("email") as HTMLInputElement;
 const addressInput = document.getElementById("address") as HTMLInputElement;
 const dobInput = document.getElementById("dob") as HTMLInputElement;
 const cnicInput = document.getElementById("cnic") as HTMLInputElement;
-const profileImageInput = document.getElementById("profileImage") as HTMLInputElement;
-
+const profileImageInput = document.getElementById(
+  "profileImage"
+) as HTMLInputElement;
 
 let profileImageDataURL: string | null = null;
-
-
 
 // Listen for image file input change
 profileImageInput.addEventListener("change", (event) => {
@@ -49,7 +50,9 @@ const getInputValues = (containerId: string): string[] => {
   const container = document.getElementById(containerId);
   if (!container) return [];
   const inputs = container.querySelectorAll("input[type='text'], textarea");
-  return Array.from(inputs).map(input => (input as HTMLInputElement).value).filter(val => val.trim() !== "");
+  return Array.from(inputs)
+    .map((input) => (input as HTMLInputElement).value)
+    .filter((val) => val.trim() !== "");
 };
 
 // Function to add new input fields (Skills, Achievements, Languages, etc.)
@@ -64,9 +67,17 @@ const addInputField = (containerId: string, placeholder: string) => {
 };
 
 // Event listeners for adding more fields
-document.getElementById("add-skill")?.addEventListener("click", () => addInputField("skills", "Skill"));
-document.getElementById("add-achievement")?.addEventListener("click", () => addInputField("achievements", "Achievement"));
-document.getElementById("add-language")?.addEventListener("click", () => addInputField("languages", "Language"));
+document
+  .getElementById("add-skill")
+  ?.addEventListener("click", () => addInputField("skills", "Skill"));
+document
+  .getElementById("add-achievement")
+  ?.addEventListener("click", () =>
+    addInputField("achievements", "Achievement")
+  );
+document
+  .getElementById("add-language")
+  ?.addEventListener("click", () => addInputField("languages", "Language"));
 document.getElementById("add-education")?.addEventListener("click", () => {
   const educationContainer = document.getElementById("education");
   if (educationContainer) {
@@ -145,7 +156,9 @@ function generateResume() {
   const languages = getInputValues("languages");
 
   // Gather Education
-  const educationInputs = document.querySelectorAll("#education input[type='text']");
+  const educationInputs = document.querySelectorAll(
+    "#education input[type='text']"
+  );
   const education: EducationEntry[] = [];
   for (let i = 0; i < educationInputs.length; i += 3) {
     const institute = (educationInputs[i] as HTMLInputElement).value.trim();
@@ -157,9 +170,16 @@ function generateResume() {
   }
 
   // Gather Experience
-  const experienceInputs = document.querySelectorAll("#experience input[type='text']");
-  const experienceTextarea = document.querySelector("#experience textarea") as HTMLTextAreaElement;
-  const responsibilities = experienceTextarea.value.split('\n').map(resp => resp.trim()).filter(resp => resp !== "");
+  const experienceInputs = document.querySelectorAll(
+    "#experience input[type='text']"
+  );
+  const experienceTextarea = document.querySelector(
+    "#experience textarea"
+  ) as HTMLTextAreaElement;
+  const responsibilities = experienceTextarea.value
+    .split("\n")
+    .map((resp) => resp.trim())
+    .filter((resp) => resp !== "");
 
   const experience: ExperienceEntry[] = [];
   for (let i = 0; i < experienceInputs.length; i += 3) {
@@ -172,12 +192,16 @@ function generateResume() {
   }
 
   // Gather Projects
-  const projectsInputs = document.querySelectorAll("#projects input[type='text']");
-  const projectsTextarea = document.querySelector("#projects textarea") as HTMLTextAreaElement;
+  const projectsInputs = document.querySelectorAll(
+    "#projects input[type='text']"
+  );
+  const projectsTextarea = document.querySelector(
+    "#projects textarea"
+  ) as HTMLTextAreaElement;
   const projects: ProjectEntry[] = [];
   for (let i = 0; i < projectsInputs.length; i += 2) {
     const name = (projectsInputs[i] as HTMLInputElement).value.trim();
-    const description = (projectsTextarea.value).trim();
+    const description = projectsTextarea.value.trim();
     if (name && description) {
       projects.push({ name, description });
     }
@@ -199,18 +223,20 @@ function generateResume() {
           <!-- Left Column -->
           <aside class="sidebar">
             <div class="profile-image" style="display: flex;justify-content: center; align-items: center; width: 200px; height: 200;">
-            <img src="${profileImageDataURL ?? './programmer.jpg'}" alt="Profile photo"  width="150" height="150" class="avatar">
+            <img src="${
+              profileImageDataURL ?? "./programmer.jpg"
+            }" alt="Profile photo"  width="150" height="150" class="avatar">
           </div>
             <h1 class="name">${name.toUpperCase()}</h1>
             <section class="section">
               <h2>ABOUT ME</h2>
-              <p>${objective}</p>
+              <p class="aboutMe">${objective}</p>
             </section>
 
             <section class="section">
               <h2>SKILLS</h2>
               <ul>
-                ${skills.map(skill => `<li>${skill}</li>`).join('')}
+                ${skills.map((skill) => `<li>${skill}</li>`).join("")}
               </ul>
             </section>
 
@@ -227,49 +253,63 @@ function generateResume() {
           <main class="main-content">
             <section>
               <h2>EDUCATION</h2>
-              ${education.map(edu => `
+              ${education
+                .map(
+                  (edu) => `
                 <div class="education">
                   <p>${edu.year} | ${edu.institute}</p>
                   <h3>${edu.subject}</h3>
                 </div>
-              `).join('')}
+              `
+                )
+                .join("")}
             </section>
 
             <section>
               <h2>WORK EXPERIENCE</h2>
-              ${experience.map(exp => `
+              ${experience
+                .map(
+                  (exp) => `
                 <div class="job">
                   <h3>${exp.company}</h3>
                   <p>Position: ${exp.position}</p>
                   <p>Years of Experience: ${exp.years}</p>
                   <ul>
-                    ${exp.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
+                    ${exp.responsibilities
+                      .map((resp) => `<li>${resp}</li>`)
+                      .join("")}
                   </ul>
                 </div>
-              `).join('')}
+              `
+                )
+                .join("")}
             </section>
 
             <section>
               <h2>PROJECTS</h2>
-              ${projects.map(proj => `
+              ${projects
+                .map(
+                  (proj) => `
                 <div class="project">
                   <h3>${proj.name}</h3>
                   <p>${proj.description}</p>
                 </div>
-              `).join('')}
+              `
+                )
+                .join("")}
             </section>
 
             <section>
               <h2>ACHIEVEMENTS</h2>
               <ul>
-                ${achievements.map(ach => `<li>${ach}</li>`).join('')}
+                ${achievements.map((ach) => `<li>${ach}</li>`).join("")}
               </ul>
             </section>
 
             <section>
               <h2>LANGUAGES</h2>
               <ul>
-                ${languages.map(lang => `<li>${lang}</li>`).join('')}
+                ${languages.map((lang) => `<li>${lang}</li>`).join("")}
               </ul>
             </section>
           </main>

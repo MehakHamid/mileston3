@@ -56,6 +56,7 @@ h2 {
     margin-top: 20px;
     border-bottom: 1px solid #444b58;
     padding-bottom: 5px;
+    margin-bottom: 20px;
 }
 
 .about,
@@ -113,4 +114,20 @@ h2 {
 .contact p {
     font-size: 14px;
     color: #475569;
+   
+}
+.name{
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+}
+.aboutMe{
+    line-height: 27px;
+}
+
+.section{
+    padding: 20px;
+}
+ul{
+    padding: 20px;
 }

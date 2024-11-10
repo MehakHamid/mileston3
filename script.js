@@ -27,7 +27,9 @@ var getInputValues = function (containerId) {
     if (!container)
         return [];
     var inputs = container.querySelectorAll("input[type='text'], textarea");
-    return Array.from(inputs).map(function (input) { return input.value; }).filter(function (val) { return val.trim() !== ""; });
+    return Array.from(inputs)
+        .map(function (input) { return input.value; })
+        .filter(function (val) { return val.trim() !== ""; });
 };
 // Function to add new input fields (Skills, Achievements, Languages, etc.)
 var addInputField = function (containerId, placeholder) {
@@ -40,9 +42,14 @@ var addInputField = function (containerId, placeholder) {
     }
 };
 // Event listeners for adding more fields
-(_a = document.getElementById("add-skill")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", function () { return addInputField("skills", "Skill"); });
-(_b = document.getElementById("add-achievement")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", function () { return addInputField("achievements", "Achievement"); });
-(_c = document.getElementById("add-language")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", function () { return addInputField("languages", "Language"); });
+(_a = document
+    .getElementById("add-skill")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", function () { return addInputField("skills", "Skill"); });
+(_b = document
+    .getElementById("add-achievement")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", function () {
+    return addInputField("achievements", "Achievement");
+});
+(_c = document
+    .getElementById("add-language")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", function () { return addInputField("languages", "Language"); });
 (_d = document.getElementById("add-education")) === null || _d === void 0 ? void 0 : _d.addEventListener("click", function () {
     var educationContainer = document.getElementById("education");
     if (educationContainer) {
@@ -119,7 +126,10 @@ function generateResume() {
     // Gather Experience
     var experienceInputs = document.querySelectorAll("#experience input[type='text']");
     var experienceTextarea = document.querySelector("#experience textarea");
-    var responsibilities = experienceTextarea.value.split('\n').map(function (resp) { return resp.trim(); }).filter(function (resp) { return resp !== ""; });
+    var responsibilities = experienceTextarea.value
+        .split("\n")
+        .map(function (resp) { return resp.trim(); })
+        .filter(function (resp) { return resp !== ""; });
     var experience = [];
     for (var i = 0; i < experienceInputs.length; i += 3) {
         var company = experienceInputs[i].value.trim();
@@ -135,13 +145,21 @@ function generateResume() {
     var projects = [];
     for (var i = 0; i < projectsInputs.length; i += 2) {
         var name_1 = projectsInputs[i].value.trim();
-        var description = (projectsTextarea.value).trim();
+        var description = projectsTextarea.value.trim();
         if (name_1 && description) {
             projects.push({ name: name_1, description: description });
         }
     }
     // Generate Resume HTML
-    var resumeHtml = "\n    <!DOCTYPE html>\n    <html lang=\"en\">\n    <head>\n      <meta charset=\"UTF-8\">\n      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n      <title>Profile Page</title>\n      <link rel=\"stylesheet\" href=\"./dynamic.css\">\n    </head>\n    <body>\n      <div class=\"container\">\n        <div class=\"profile\">\n          <!-- Left Column -->\n          <aside class=\"sidebar\">\n            <div class=\"profile-image\" style=\"display: flex;justify-content: center; align-items: center; width: 200px; height: 200;\">\n            <img src=\"".concat(profileImageDataURL !== null && profileImageDataURL !== void 0 ? profileImageDataURL : './programmer.jpg', "\" alt=\"Profile photo\"  width=\"150\" height=\"150\" class=\"avatar\">\n          </div>\n            <h1 class=\"name\">").concat(name.toUpperCase(), "</h1>\n            <section class=\"section\">\n              <h2>ABOUT ME</h2>\n              <p>").concat(objective, "</p>\n            </section>\n\n            <section class=\"section\">\n              <h2>SKILLS</h2>\n              <ul>\n                ").concat(skills.map(function (skill) { return "<li>".concat(skill, "</li>"); }).join(''), "\n              </ul>\n            </section>\n\n            <section class=\"section\">\n              <h2>CONTACT</h2>\n              <p>Email: ").concat(email, "</p>\n              <p>Address: ").concat(address, "</p>\n              <p>DOB: ").concat(dob, "</p>\n              <p>CNIC: ").concat(cnic, "</p>\n            </section>\n          </aside>\n\n          <!-- Right Column -->\n          <main class=\"main-content\">\n            <section>\n              <h2>EDUCATION</h2>\n              ").concat(education.map(function (edu) { return "\n                <div class=\"education\">\n                  <p>".concat(edu.year, " | ").concat(edu.institute, "</p>\n                  <h3>").concat(edu.subject, "</h3>\n                </div>\n              "); }).join(''), "\n            </section>\n\n            <section>\n              <h2>WORK EXPERIENCE</h2>\n              ").concat(experience.map(function (exp) { return "\n                <div class=\"job\">\n                  <h3>".concat(exp.company, "</h3>\n                  <p>Position: ").concat(exp.position, "</p>\n                  <p>Years of Experience: ").concat(exp.years, "</p>\n                  <ul>\n                    ").concat(exp.responsibilities.map(function (resp) { return "<li>".concat(resp, "</li>"); }).join(''), "\n                  </ul>\n                </div>\n              "); }).join(''), "\n            </section>\n\n            <section>\n              <h2>PROJECTS</h2>\n              ").concat(projects.map(function (proj) { return "\n                <div class=\"project\">\n                  <h3>".concat(proj.name, "</h3>\n                  <p>").concat(proj.description, "</p>\n                </div>\n              "); }).join(''), "\n            </section>\n\n            <section>\n              <h2>ACHIEVEMENTS</h2>\n              <ul>\n                ").concat(achievements.map(function (ach) { return "<li>".concat(ach, "</li>"); }).join(''), "\n              </ul>\n            </section>\n\n            <section>\n              <h2>LANGUAGES</h2>\n              <ul>\n                ").concat(languages.map(function (lang) { return "<li>".concat(lang, "</li>"); }).join(''), "\n              </ul>\n            </section>\n          </main>\n        </div>\n      </div>\n    </body>\n    </html>\n  ");
+    var resumeHtml = "\n    <!DOCTYPE html>\n    <html lang=\"en\">\n    <head>\n      <meta charset=\"UTF-8\">\n      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n      <title>Profile Page</title>\n      <link rel=\"stylesheet\" href=\"./dynamic.css\">\n    </head>\n    <body>\n      <div class=\"container\">\n        <div class=\"profile\">\n          <!-- Left Column -->\n          <aside class=\"sidebar\">\n            <div class=\"profile-image\" style=\"display: flex;justify-content: center; align-items: center; width: 200px; height: 200;\">\n            <img src=\"".concat(profileImageDataURL !== null && profileImageDataURL !== void 0 ? profileImageDataURL : "./programmer.jpg", "\" alt=\"Profile photo\"  width=\"150\" height=\"150\" class=\"avatar\">\n          </div>\n            <h1 class=\"name\">").concat(name.toUpperCase(), "</h1>\n            <section class=\"section\">\n              <h2>ABOUT ME</h2>\n              <p class=\"aboutMe\">").concat(objective, "</p>\n            </section>\n\n            <section class=\"section\">\n              <h2>SKILLS</h2>\n              <ul>\n                ").concat(skills.map(function (skill) { return "<li>".concat(skill, "</li>"); }).join(""), "\n              </ul>\n            </section>\n\n            <section class=\"section\">\n              <h2>CONTACT</h2>\n              <p>Email: ").concat(email, "</p>\n              <p>Address: ").concat(address, "</p>\n              <p>DOB: ").concat(dob, "</p>\n              <p>CNIC: ").concat(cnic, "</p>\n            </section>\n          </aside>\n\n          <!-- Right Column -->\n          <main class=\"main-content\">\n            <section>\n              <h2>EDUCATION</h2>\n              ").concat(education
+        .map(function (edu) { return "\n                <div class=\"education\">\n                  <p>".concat(edu.year, " | ").concat(edu.institute, "</p>\n                  <h3>").concat(edu.subject, "</h3>\n                </div>\n              "); })
+        .join(""), "\n            </section>\n\n            <section>\n              <h2>WORK EXPERIENCE</h2>\n              ").concat(experience
+        .map(function (exp) { return "\n                <div class=\"job\">\n                  <h3>".concat(exp.company, "</h3>\n                  <p>Position: ").concat(exp.position, "</p>\n                  <p>Years of Experience: ").concat(exp.years, "</p>\n                  <ul>\n                    ").concat(exp.responsibilities
+        .map(function (resp) { return "<li>".concat(resp, "</li>"); })
+        .join(""), "\n                  </ul>\n                </div>\n              "); })
+        .join(""), "\n            </section>\n\n            <section>\n              <h2>PROJECTS</h2>\n              ").concat(projects
+        .map(function (proj) { return "\n                <div class=\"project\">\n                  <h3>".concat(proj.name, "</h3>\n                  <p>").concat(proj.description, "</p>\n                </div>\n              "); })
+        .join(""), "\n            </section>\n\n            <section>\n              <h2>ACHIEVEMENTS</h2>\n              <ul>\n                ").concat(achievements.map(function (ach) { return "<li>".concat(ach, "</li>"); }).join(""), "\n              </ul>\n            </section>\n\n            <section>\n              <h2>LANGUAGES</h2>\n              <ul>\n                ").concat(languages.map(function (lang) { return "<li>".concat(lang, "</li>"); }).join(""), "\n              </ul>\n            </section>\n          </main>\n        </div>\n      </div>\n    </body>\n    </html>\n  ");
     // Open the generated resume in a new window
     var newWindow = window.open();
     if (newWindow) {
