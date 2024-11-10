@@ -1,19 +1,3 @@
-let formData = {
-  name: '',
-  objective: '',
-  email: '',
-  address: '',
-  dob: '',
-  cnic: '',
-  education: [],
-  experience: [],
-  skills: [],
-  achievements: [],
-  languages: [],
-  profileImageDataURL: ''
-};
-
-
 // Define interfaces for structured data
 interface EducationEntry {
   institute: string;
@@ -207,7 +191,7 @@ function generateResume() {
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Profile Page</title>
-      <link rel="stylesheet" href="static2.css">
+      <link rel="stylesheet" href="./dynamic.css">
     </head>
     <body>
       <div class="container">
@@ -304,33 +288,3 @@ function generateResume() {
     alert("Unable to open the resume in a new window.");
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
