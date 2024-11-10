@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dynamic Resume Builder</title>
-  <link rel="stylesheet" href="style.css">  <!-- Link to your CSS file -->
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div class="container">
     <div class="header">
       <input id="name" type="text" placeholder="Enter Your Name">
       <label>Objective:</label>
       <input id="objective" type="text" placeholder="Enter your Objective summary">
+      <div>
+        <label style="cursor: pointer;" for="profileImage">Upload Profile</label>
+        <input style="display: none;" type="file" id="profileImage" accept="image/*">
+      </div>
     </div>
 
     <div class="resume-content">
@@ -80,9 +86,11 @@
     </div>
     <div id="resume-output"><button id="generate-resume">Generate Resume</button></div>
 
-    
+
   </div>
 
-  <script src="script.js"></script> <!-- Link to your JavaScript file -->
+  <script src="./script.js"></script>
+  <!-- <script src="./dynamicss.js"></script> -->
 </body>
+
 </html>

@@ -1,162 +1,290 @@
-// script.ts
-
-// Helper function to add new input elements for multiple entries
-function addInput(sectionId: string, placeholder: string) {
-  const section = document.getElementById(sectionId) as HTMLElement;
-  const input = document.createElement("input");
-  input.type = "text";
-  input.placeholder = placeholder;
-  input.classList.add("dynamic-input");
-  section.appendChild(input);
+// Define interfaces for structured data
+interface EducationEntry {
+  institute: string;
+  subject: string;
+  year: string;
 }
 
-// Add More buttons event listeners
-document.getElementById("add-skill")?.addEventListener("click", () => {
-  addInput("skills", "Skill");
+interface ExperienceEntry {
+  company: string;
+  position: string;
+  years: string;
+  responsibilities: string[];
+}
+
+interface ProjectEntry {
+  name: string;
+  description: string;
+}
+
+// Get references to the HTML elements
+const generateResumeBtn = document.getElementById("generate-resume") as HTMLButtonElement;
+const nameInput = document.getElementById("name") as HTMLInputElement;
+const objectiveInput = document.getElementById("objective") as HTMLInputElement;
+const emailInput = document.getElementById("email") as HTMLInputElement;
+const addressInput = document.getElementById("address") as HTMLInputElement;
+const dobInput = document.getElementById("dob") as HTMLInputElement;
+const cnicInput = document.getElementById("cnic") as HTMLInputElement;
+const profileImageInput = document.getElementById("profileImage") as HTMLInputElement;
+
+
+let profileImageDataURL: string | null = null;
+
+
+
+// Listen for image file input change
+profileImageInput.addEventListener("change", (event) => {
+  const file = (event.target as HTMLInputElement).files?.[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      profileImageDataURL = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
 });
 
-document.getElementById("add-achievement")?.addEventListener("click", () => {
-  addInput("achievements", "Achievement");
-});
+// Function to get all input values within a container
+const getInputValues = (containerId: string): string[] => {
+  const container = document.getElementById(containerId);
+  if (!container) return [];
+  const inputs = container.querySelectorAll("input[type='text'], textarea");
+  return Array.from(inputs).map(input => (input as HTMLInputElement).value).filter(val => val.trim() !== "");
+};
 
-document.getElementById("add-language")?.addEventListener("click", () => {
-  addInput("languages", "Language");
-});
+// Function to add new input fields (Skills, Achievements, Languages, etc.)
+const addInputField = (containerId: string, placeholder: string) => {
+  const container = document.getElementById(containerId);
+  if (container) {
+    const newInput = document.createElement("input");
+    newInput.type = "text";
+    newInput.placeholder = placeholder;
+    container.appendChild(newInput);
+  }
+};
 
+// Event listeners for adding more fields
+document.getElementById("add-skill")?.addEventListener("click", () => addInputField("skills", "Skill"));
+document.getElementById("add-achievement")?.addEventListener("click", () => addInputField("achievements", "Achievement"));
+document.getElementById("add-language")?.addEventListener("click", () => addInputField("languages", "Language"));
 document.getElementById("add-education")?.addEventListener("click", () => {
-  addEducationFields();
+  const educationContainer = document.getElementById("education");
+  if (educationContainer) {
+    const instituteInput = document.createElement("input");
+    instituteInput.type = "text";
+    instituteInput.placeholder = "Institute Name";
+
+    const subjectInput = document.createElement("input");
+    subjectInput.type = "text";
+    subjectInput.placeholder = "Subject";
+
+    const yearInput = document.createElement("input");
+    yearInput.type = "text";
+    yearInput.placeholder = "Passing Year";
+
+    educationContainer.appendChild(instituteInput);
+    educationContainer.appendChild(subjectInput);
+    educationContainer.appendChild(yearInput);
+  }
 });
 
 document.getElementById("add-experience")?.addEventListener("click", () => {
-  addExperienceFields();
+  const experienceContainer = document.getElementById("experience");
+  if (experienceContainer) {
+    const companyInput = document.createElement("input");
+    companyInput.type = "text";
+    companyInput.placeholder = "Company Name";
+
+    const positionInput = document.createElement("input");
+    positionInput.type = "text";
+    positionInput.placeholder = "Position";
+
+    const yearsInput = document.createElement("input");
+    yearsInput.type = "text";
+    yearsInput.placeholder = "Years of Experience";
+
+    const responsibilitiesTextarea = document.createElement("textarea");
+    responsibilitiesTextarea.placeholder = "Responsibilities";
+
+    experienceContainer.appendChild(companyInput);
+    experienceContainer.appendChild(positionInput);
+    experienceContainer.appendChild(yearsInput);
+    experienceContainer.appendChild(responsibilitiesTextarea);
+  }
 });
 
 document.getElementById("add-project")?.addEventListener("click", () => {
-  addProjectFields();
+  const projectsContainer = document.getElementById("projects");
+  if (projectsContainer) {
+    const projectNameInput = document.createElement("input");
+    projectNameInput.type = "text";
+    projectNameInput.placeholder = "Project Name";
+
+    const projectDescriptionTextarea = document.createElement("textarea");
+    projectDescriptionTextarea.placeholder = "Project Description";
+
+    projectsContainer.appendChild(projectNameInput);
+    projectsContainer.appendChild(projectDescriptionTextarea);
+  }
 });
 
-// Function to add education fields
-function addEducationFields() {
-  const section = document.getElementById("education") as HTMLElement;
-  const instituteInput = document.createElement("input");
-  instituteInput.type = "text";
-  instituteInput.placeholder = "Institute Name";
-  section.appendChild(instituteInput);
-
-  const subjectInput = document.createElement("input");
-  subjectInput.type = "text";
-  subjectInput.placeholder = "Subject";
-  section.appendChild(subjectInput);
-
-  const yearInput = document.createElement("input");
-  yearInput.type = "text";
-  yearInput.placeholder = "Passing Year";
-  section.appendChild(yearInput);
-}
-
-// Function to add experience fields
-function addExperienceFields() {
-  const section = document.getElementById("experience") as HTMLElement;
-  const companyInput = document.createElement("input");
-  companyInput.type = "text";
-  companyInput.placeholder = "Company Name";
-  section.appendChild(companyInput);
-
-  const positionInput = document.createElement("input");
-  positionInput.type = "text";
-  positionInput.placeholder = "Position";
-  section.appendChild(positionInput);
-
-  const yearsInput = document.createElement("input");
-  yearsInput.type = "text";
-  yearsInput.placeholder = "Years of Experience";
-  section.appendChild(yearsInput);
-
-  const responsibilitiesInput = document.createElement("textarea");
-  responsibilitiesInput.placeholder = "Responsibilities";
-  section.appendChild(responsibilitiesInput);
-}
-
-// Function to add project fields
-function addProjectFields() {
-  const section = document.getElementById("projects") as HTMLElement;
-  const projectNameInput = document.createElement("input");
-  projectNameInput.type = "text";
-  projectNameInput.placeholder = "Project Name";
-  section.appendChild(projectNameInput);
-
-  const projectDescInput = document.createElement("textarea");
-  projectDescInput.placeholder = "Project Description";
-  section.appendChild(projectDescInput);
-}
-
-// Generate Resume Button event listener
-document.getElementById("generate-resume")?.addEventListener("click", generateResume);
+generateResumeBtn.addEventListener("click", generateResume);
 
 function generateResume() {
-  const name = (document.getElementById("name") as HTMLInputElement).value;
-  const objective = (document.getElementById("objective") as HTMLInputElement).value;
-  
-  const personalInfo = getInputValues("personal-info");
+  // Gather all input data
+  const name = nameInput.value.trim();
+  const objective = objectiveInput.value.trim();
+  const email = emailInput.value.trim();
+  const address = addressInput.value.trim();
+  const dob = dobInput.value.trim();
+  const cnic = cnicInput.value.trim();
+
+  // Gather Skills, Achievements, Languages
   const skills = getInputValues("skills");
   const achievements = getInputValues("achievements");
   const languages = getInputValues("languages");
-  const education = getSectionValues("education");
-  const experience = getSectionValues("experience");
-  const projects = getSectionValues("projects");
 
-  const resumeSection = document.createElement("div");
-  resumeSection.className = "generated-resume";
-  
-  // Add Name and Objective
-  const nameElement = document.createElement("h2");
-  nameElement.innerText = name;
-  resumeSection.appendChild(nameElement);
-  
-  const objectiveElement = document.createElement("p");
-  objectiveElement.innerText = `Objective: ${objective}`;
-  resumeSection.appendChild(objectiveElement);
-  
-  // Add sections to display each part of the resume
-  appendSection(resumeSection, "Personal Info", personalInfo);
-  appendSection(resumeSection, "Skills", skills);
-  appendSection(resumeSection, "Achievements", achievements);
-  appendSection(resumeSection, "Languages", languages);
-  appendSection(resumeSection, "Education", education);
-  appendSection(resumeSection, "Experience", experience);
-  appendSection(resumeSection, "Projects", projects);
-  
-  // Append the generated resume to the document body or a specific container
-  const outputContainer = document.getElementById("resume-output");
-  outputContainer!.innerHTML = ""; // Clear previous resume if any
-  outputContainer!.appendChild(resumeSection);
-}
-
-// Helper function to create sections in the resume output
-function appendSection(container: HTMLElement, title: string, items: string[]) {
-  if (items.length > 0) {
-    const sectionTitle = document.createElement("h3");
-    sectionTitle.innerText = title;
-    container.appendChild(sectionTitle);
-    
-    items.forEach(item => {
-      const itemElement = document.createElement("p");
-      itemElement.innerText = item;
-      container.appendChild(itemElement);
-    });
+  // Gather Education
+  const educationInputs = document.querySelectorAll("#education input[type='text']");
+  const education: EducationEntry[] = [];
+  for (let i = 0; i < educationInputs.length; i += 3) {
+    const institute = (educationInputs[i] as HTMLInputElement).value.trim();
+    const subject = (educationInputs[i + 1] as HTMLInputElement).value.trim();
+    const year = (educationInputs[i + 2] as HTMLInputElement).value.trim();
+    if (institute && subject && year) {
+      education.push({ institute, subject, year });
+    }
   }
-}
 
-// Helper function to get values from sections with simple input fields
-function getInputValues(sectionId: string): string[] {
-  const section = document.getElementById(sectionId) as HTMLElement;
-  const inputs = Array.from(section.querySelectorAll("input"));
-  return inputs.map(input => (input as HTMLInputElement).value).filter(value => value.trim() !== "");
-}
+  // Gather Experience
+  const experienceInputs = document.querySelectorAll("#experience input[type='text']");
+  const experienceTextarea = document.querySelector("#experience textarea") as HTMLTextAreaElement;
+  const responsibilities = experienceTextarea.value.split('\n').map(resp => resp.trim()).filter(resp => resp !== "");
 
-// Helper function to get values from sections with grouped inputs (Education, Experience, Projects)
-function getSectionValues(sectionId: string): string[] {
-  const section = document.getElementById(sectionId) as HTMLElement;
-  const groupedElements = Array.from(section.children);
-  return groupedElements.map(el => (el as HTMLInputElement | HTMLTextAreaElement).value).filter(value => value.trim() !== "");
+  const experience: ExperienceEntry[] = [];
+  for (let i = 0; i < experienceInputs.length; i += 3) {
+    const company = (experienceInputs[i] as HTMLInputElement).value.trim();
+    const position = (experienceInputs[i + 1] as HTMLInputElement).value.trim();
+    const years = (experienceInputs[i + 2] as HTMLInputElement).value.trim();
+    if (company && position && years) {
+      experience.push({ company, position, years, responsibilities });
+    }
+  }
+
+  // Gather Projects
+  const projectsInputs = document.querySelectorAll("#projects input[type='text']");
+  const projectsTextarea = document.querySelector("#projects textarea") as HTMLTextAreaElement;
+  const projects: ProjectEntry[] = [];
+  for (let i = 0; i < projectsInputs.length; i += 2) {
+    const name = (projectsInputs[i] as HTMLInputElement).value.trim();
+    const description = (projectsTextarea.value).trim();
+    if (name && description) {
+      projects.push({ name, description });
+    }
+  }
+
+  // Generate Resume HTML
+  const resumeHtml = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Profile Page</title>
+      <link rel="stylesheet" href="./dynamic.css">
+    </head>
+    <body>
+      <div class="container">
+        <div class="profile">
+          <!-- Left Column -->
+          <aside class="sidebar">
+            <div class="profile-image" style="display: flex;justify-content: center; align-items: center; width: 200px; height: 200;">
+            <img src="${profileImageDataURL ?? './programmer.jpg'}" alt="Profile photo"  width="150" height="150" class="avatar">
+          </div>
+            <h1 class="name">${name.toUpperCase()}</h1>
+            <section class="section">
+              <h2>ABOUT ME</h2>
+              <p>${objective}</p>
+            </section>
+
+            <section class="section">
+              <h2>SKILLS</h2>
+              <ul>
+                ${skills.map(skill => `<li>${skill}</li>`).join('')}
+              </ul>
+            </section>
+
+            <section class="section">
+              <h2>CONTACT</h2>
+              <p>Email: ${email}</p>
+              <p>Address: ${address}</p>
+              <p>DOB: ${dob}</p>
+              <p>CNIC: ${cnic}</p>
+            </section>
+          </aside>
+
+          <!-- Right Column -->
+          <main class="main-content">
+            <section>
+              <h2>EDUCATION</h2>
+              ${education.map(edu => `
+                <div class="education">
+                  <p>${edu.year} | ${edu.institute}</p>
+                  <h3>${edu.subject}</h3>
+                </div>
+              `).join('')}
+            </section>
+
+            <section>
+              <h2>WORK EXPERIENCE</h2>
+              ${experience.map(exp => `
+                <div class="job">
+                  <h3>${exp.company}</h3>
+                  <p>Position: ${exp.position}</p>
+                  <p>Years of Experience: ${exp.years}</p>
+                  <ul>
+                    ${exp.responsibilities.map(resp => `<li>${resp}</li>`).join('')}
+                  </ul>
+                </div>
+              `).join('')}
+            </section>
+
+            <section>
+              <h2>PROJECTS</h2>
+              ${projects.map(proj => `
+                <div class="project">
+                  <h3>${proj.name}</h3>
+                  <p>${proj.description}</p>
+                </div>
+              `).join('')}
+            </section>
+
+            <section>
+              <h2>ACHIEVEMENTS</h2>
+              <ul>
+                ${achievements.map(ach => `<li>${ach}</li>`).join('')}
+              </ul>
+            </section>
+
+            <section>
+              <h2>LANGUAGES</h2>
+              <ul>
+                ${languages.map(lang => `<li>${lang}</li>`).join('')}
+              </ul>
+            </section>
+          </main>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  // Open the generated resume in a new window
+  const newWindow = window.open();
+  if (newWindow) {
+    newWindow.document.write(resumeHtml);
+    newWindow.document.close();
+  } else {
+    alert("Unable to open the resume in a new window.");
+  }
 }
