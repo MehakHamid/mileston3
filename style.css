@@ -13,6 +13,10 @@ html, body {
 }
 
 .header {
+  background-color: #007bff;
+  /* Blue background */
+  color: #fff;
+  padding: 20px;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -20,8 +24,22 @@ html, body {
 .header input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.objective {
+  background-color: #fff;
+  /* White background */
+  padding: 20px;
+  text-align: center;
+}
+
+.objective input[type="text"] {
+  width: 70%;
+  height: 30px;
+  font-size: 18px;
+  padding: 10px;
+
 }
 
 .resume-content {
@@ -30,12 +48,15 @@ html, body {
 
 .left-section {
   width: 35%;
-  background-color: #f0f0f0;
+  background-color: #ADD8E6;
+  /* Light blue background */
   padding: 20px;
 }
 
 .right-section {
   width: 65%;
+  background-color: #fff;
+  /* White background */
   padding: 20px;
 }
 
@@ -43,15 +64,23 @@ html, body {
   margin-top: 0;
 }
 
-.left-section input, .right-section input, .left-section textarea, .right-section textarea {
+input[type="text"],
+textarea {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #ddd;
+  outline: none;
+  border: none;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-left: 1px solid #ddd;
 }
 
-.left-section button, .right-section button {
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
   padding: 10px 20px;
   background-color: #4CAF50;
   color: white;
@@ -60,16 +89,23 @@ html, body {
   cursor: pointer;
 }
 
-#resume-output button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+button:hover {
+  background-color: #0056b3;
 }
 
 #resume-output {
   text-align: center;
   margin-top: 20px;
+}
+
+#generate-resume {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+#generate-resume:hover {
+  background-color: #3e8e41;
 }
